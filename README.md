@@ -12,4 +12,4 @@ __Alunos do Curso Técnico em Química__:
 
 _Inserir resumo do projeto_
 
-<img src="http://aprendizadodemaquina.com.br/grafico_vinho.png">
+<img src="http://aprendizadodemaquina.com.br/grafico.png">
