@@ -7,3 +7,5 @@ __Coorientador:__ <a href="http://lattes.cnpq.br/4539575610533576" target="_blan
 __Alunos do Curso Técnico em Química__: Nícolas de Freitas Amaral, Pedro Henrique Oliveira da Silva, Thiago Henrique Reis<br />
 
 _Inserir resumo do projeto_
+
+<img src="http://aprendizadodemaquina.com.br/grafico_vinho.png">
