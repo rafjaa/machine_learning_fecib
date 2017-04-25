@@ -1,4 +1,4 @@
-# ÁLCOOL, AÇÚCARES E BITS: APRENDIZADO DE MÁQUINA E A QUÍMICA DOS VINHOS
+# Álcool, açúcares e bits: Aprendizado de Máquina e a química dos vinhos
 
 ___Projeto em desenvolvimento para a VI FECIB 2017___
 
