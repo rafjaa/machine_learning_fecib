@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto; }
+
+
+/* Cabeçalho */
+#header {
+	background-color: #0B0B61; 
+	height: 70px;
+	color: #FFF;
+}
+
+/* Titulo */
+header div strong {
+	font-size: 20px;
+}
+
+nav {
+	margin-top: 15px;
+}
+
+#pesquisa {
+	margin-top: 100px;
+}
+
+a {
+	color: #FFF;
+}
+
+a:hover{
+	color: #FFF !important;
+}
+
+input[type="Number"] {
+	width: 90px;
+}
+
+#periodo {
+	width: 60px;
+}
+
