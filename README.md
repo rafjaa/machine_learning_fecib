@@ -10,6 +10,6 @@ __Alunos do Curso Técnico em Química__:
 - Pedro Henrique Oliveira da Silva
 - Thiago Henrique Reis<br />
 
-_Inserir resumo do projeto_
+_O presente trabalho tem como objetivo apresentar de forma didática o que é o Aprendizado de Máquina, suas aplicações nas mais diversas áreas do conhecimento e seus impactos na sociedade moderna. Será demonstrado um exemplo prático de aprendizado de máquina contextualizado em relação à química dos vinhos, demonstrando como a Química está presente no cotidiano, e como redes neurais artificiais podem ser aplicadas em diversos domínios de problemas. Pretende-se estimular os visitantes a construírem um novo olhar sobre como a tecnologia, aliada às áreas tradicionais do conhecimento, possibilita a construção de novas realidades e possibilidades, pautadas na inovação e na multidisciplinaridade._
 
 <img src="http://aprendizadodemaquina.com.br/grafico.png">
