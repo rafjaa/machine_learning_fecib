@@ -1,0 +1,17 @@
+# Python
+*~
+*.pyc
+*.pyo
+
+#db
+*.sqlite
+
+# pip
+pip-log.txt
+build
+
+# virtualenv
+/bin
+/include
+/lib
+/local
