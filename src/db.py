@@ -14,52 +14,102 @@ def verifica_banco():
     if not path.isfile(_ARQUIVO_BANCO_):
         conn = connect(_ARQUIVO_BANCO_)
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.executescript('''
             CREATE TABLE usuario (
-                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL UNIQUE,
+                id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                nome_usuario TEXT NOT NULL UNIQUE,
                 curso TEXT,
-                periodo INTEGER,
-                nota INTEGER
-                
+                periodo INTEGER
             );
-        ''')
+
+            CREATE TABLE vinho (
+                id_vinho INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                nome_vinho TEXT NOT NULL,
+                nota REAL NOT NULL,
+                fixed_acidity REAL,
+                volatile_acidity REAL,
+                citric_acid REAL,
+				residual_sugar REAL,
+    			chlorides REAL,
+    			free_sulfur_dioxide REAL,
+    			total_sulfur_dioxide REAL,
+    			density REAL,
+    			pH REAL,
+    			sulphates REAL,
+ 				alcohol REAL,
+                id_usuario INTEGER NOT NULL,
+                FOREIGN KEY(id_usuario) REFERENCES usuario ON DELETE CASCADE,
+                CONSTRAINT uk_vinho UNIQUE (nome_vinho, id_usuario)
+            );
+        	''')
+
+        conn.close()
 
 
-def registra_nota(nome, curso, periodo, nota):
-    ''' Armazena nota no banco de dados'''
+def executa_query(query):
+    '''
+    Executa uma instrução sql. Retorna o útimo id inserido caso seja uma
+    operação de inserção, retorna uma lista das linhas correspondentes caso
+    seja uma operação de consulta e False em caso de erro.
+    '''
+
+    # Identifica tipo de instrução sql
+    tipo_instrucao = 1 if 'select' in query.lower() else 0
 
     try:
         conn = connect(_ARQUIVO_BANCO_)
         cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO usuario (nome, curso, periodo, nota)
-            VALUES ('%s', '%s', '%d', '%d')''' % (nome, curso, periodo, nota)
-                      )
+        cursor.execute(query)
         conn.commit()
-        return True
+        if tipo_instrucao == 0:
+            return cursor.lastrowid
+        # Retorna nome das columas e linhas recuperadas
+        return next(zip(*cursor.description)), cursor.fetchall()
     except IntegrityError:
         return False
     finally:
         conn.close()
 
 
-def get_all():
-    ''' Retorna todas notas armazenadas no banco '''
-    try:    
-        usuario_list = []
-        con = connect(_ARQUIVO_BANCO_)
-        cursor = con.cursor()
-        cursor.execute('SELECT * from usuario')
-    
-        for row in cursor.fetchall():
-            usuario_list.append(
-                    {'id': row[0], 'nome': row[1], 'curso': row[2],
-                     'periodo': row[3], 'nota': row[4]}
-            )
-    
-        return usuario_list
-    except IntegrityError:
-        return False
-    finally:
-        con.close()
+def registra_usuario(nome, curso, periodo):
+    ''' Armazena usuário no banco de dados '''
+
+    sql = '''INSERT INTO usuario (nome_usuario, curso, periodo)
+            VALUES ('%s', '%s', '%d')''' % (nome, curso, periodo)
+
+    return executa_query(sql)
+
+
+def registra_vinho(**kwargs):
+    ''' Armazena vinho no banco de dados '''
+
+    columns = kwargs.keys()
+    values = map(str, kwargs.values())
+
+    sql = 'INSERT INTO vinho %s VALUES %s' % (tuple(columns), tuple(values))
+    return executa_query(sql)
+
+
+def get_ranking(limit=-1):
+    '''
+    Retorna vinhos e seus usuários criadores, ordenado pela nota do vinho em
+    ordem decrescente. Caso seja especificado, retorna o número de linhas
+    desejavéis.
+    '''
+
+    sql = '''
+    	SELECT usuario.id_usuario, vinho.id_vinho, usuario.nome_usuario,
+        vinho.nome_vinho, curso, periodo, nota
+    	FROM usuario LEFT JOIN vinho on usuario.id_usuario=vinho.id_usuario
+    	ORDER BY nota desc
+    	'''
+    nome_colunas, rows = executa_query(sql)
+
+    ranking = []
+    for indice, row in enumerate(rows):
+        ranking.append(dict(zip(nome_colunas, row)))
+
+        if indice == limit:
+            break
+
+    return ranking

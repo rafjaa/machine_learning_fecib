@@ -6,7 +6,7 @@
 
 /* Cabeçalho */
 #header {
-	background-color: #0B0B61; 
+	background-color: #0B0B61;
 	height: 70px;
 	color: #FFF;
 }
@@ -40,3 +40,6 @@ input[type="Number"] {
 	width: 60px;
 }
 
+#nomevinho{
+  margin-top:5px
+}
