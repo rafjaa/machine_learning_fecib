@@ -15,3 +15,6 @@ build
 /include
 /lib
 /local
+
+# jupyter-notebook
+.ipynb_checkpoints
