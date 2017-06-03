@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<!-- Formulario de informações do vinho e usuário -->
+	<form action="/" method="POST">
+		<div layout="row"  class="container" flex="100">
+			<div >
+
+				<span style="color: red;"">{{mensagem}}</span>
+				
+				<h3>Dados do usuários</h3>
+				<div>
+
+					<!-- Dados do usuário -->
+					<div layout="row" layout-sm="column" layout-xs="column">
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Nome e Sobrenome</label>
+							<input required name='nome' ng-model="project.nome">
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm > 
+							<label>Digite aqui o nome do seu curso</label>
+							<input name="curso">
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Período/Ano</label>
+							<input type="number"  value="" min=1 max=10 name="periodo">
+						</md-input-container>
+					</div>
+
+					<md-input-container class="md-block" flex-gt-sm >
+						<label>Digite aqui o nome do seu vinho</label>
+						<input required name="nome_vinho" ng-model="project.nomeVinho">
+					</md-input-container>
+
+				</div>
+
+				
+				<h3>Dados do vinho</h3>
+				<div class="container">
+					{% for feature in features %}
+						<md-slider-container ng-init="{{feature.nome}}={{feature.media}}" >
+							
+							<div layout="row" flex="20" style="margin-right: 50px">
+							<span >{{ feature.title }}</span>
+							</div>
+							
+							
+							<md-slider flex="80" ng-model={{feature.nome}} min={{feature.min}} max={{feature.max}} aria-label="red" step="0.0001"  id="red-slider">
+							</md-slider>
+							
+							<div>
+								<md-input-container >
+									<input flex type="number"  ng-model={{feature.nome}} aria-label="red"
+									min={{feature.min}} max={{feature.max}} aria-controls="red-slider" 
+									step="0.001" name={{feature.nome}}>
+								</md-input-container>
+							</div>
+
+						</md-slider-container>
+					{% endfor %}
+
+					<div layout="row">
+						<span flex></span>
+						<md-button  type="submit" class="md-raised md-primary" >Criar Vinho</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+{% endblock %}

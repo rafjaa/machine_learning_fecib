@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Desafio do melhor vinho">
+		<meta name="keywords" content="Vinho, Análise qualidade do vinho, Redes neurais">
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="shortcut icon" type="image/png" href="/static/img/wine.ico"/>
+		<title>Desafio do vinho</title>
+
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.css">
+		
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+
+		
+	</head>
+
+
+	<body ng-app="BlankApp" ng-cloak>
+		<header>
+			<md-toolbar>
+				
+				<div class="md-toolbar-tools" layout="row">	
+					
+					<img src='/static/img/wine.ico' class="md-icon-button">
+					<h2>Desafio do Vinho</h2>
+					
+					<span flex></span>
+					
+					<md-button  href="/" hide-xs hide-sm show-gt-md>
+						<md-icon md-svg-src="static/img/home.svg"></md-icon>
+						<span>Inicio</span>
+					</md-button>
+
+					<md-button  href="/novovinho" hide-xs hide-sm show-gt-md>
+						<md-icon md-svg-src="static/img/add.svg"></md-icon>
+						<span>Novo Vinho</span>
+					</md-button>
+
+					<!-- Menu -->
+					<md-list-item  aria-label="More" hide-gt-sm>
+						<md-menu class="md-secondary">
+							
+							<md-button class="md-icon-button">
+								<md-icon md-svg-src="static/img/menu.svg"></md-icon>
+							</md-button>
+
+							<md-menu-content width="4">
+								
+								<md-menu-item>
+									<md-button href="/">
+										<md-icon md-svg-src="static/img/home_preto.svg"></md-icon>
+										Inicio
+									</md-button>
+								</md-menu-item>
+								
+								<md-menu-item>
+									<md-button href="/novovinho">
+										<md-icon md-svg-src="static/img/add_preto.svg" ></md-icon>
+										Novo Vinho
+									</md-button>
+								</md-menu-item>
+
+							</md-menu-content>
+
+						</md-menu>
+					</md-list-item>
+				</div>
+			</md-toolbar>
+		</header>
+
+		{% block content %}
+
+		{% endblock %}
+
+		<!-- Angular Material requires Angular.js Libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+		<!-- Angular Material Library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/js.js') }}"></script>
+
+	</body>
+
+</html>
