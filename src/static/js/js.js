@@ -1,5 +1,7 @@
+// Definindo modulo do angularJS
+app = angular.module('BlankApp', ['ngMaterial']);
 
-/* Pesquina na tabela */
+// Pesquina na tabela 
 var filtro = document.getElementById('busca');
 
 var tabela = document.getElementById('lista');
@@ -17,16 +19,12 @@ filtro.onkeyup = function() {
     }
 };
 
-/* Arrumar */
-jQuery(document).ready(function($) { 
-    $(".scroll").click(function(event){        
-        event.preventDefault();
-        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
-   });
-});
-
-
+//Âncora
 document.addEventListener("DOMContentLoaded", function(event) {
 	console.log("DOM completamente carregado e analisado" + event);
-	document.getElementById('b2').click();
+	
+    posicao = document.getElementById('posicao').value;
+    document.getElementById(posicao).style.background = '#b3b3ff';
+
+    window.location.href = "#" + posicao ;
 });

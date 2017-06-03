@@ -17,31 +17,31 @@ def verifica_banco():
         cursor.executescript('''
             CREATE TABLE usuario (
                 id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nome_usuario TEXT NOT NULL UNIQUE,
+                nome_usuario TEXT NOT NULL,
                 curso TEXT,
                 periodo INTEGER
             );
 
             CREATE TABLE vinho (
                 id_vinho INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                nome_vinho TEXT NOT NULL,
+                nome_vinho TEXT NOT NULL UNIQUE,
                 nota REAL NOT NULL,
                 fixed_acidity REAL,
                 volatile_acidity REAL,
                 citric_acid REAL,
-				residual_sugar REAL,
-    			chlorides REAL,
-    			free_sulfur_dioxide REAL,
-    			total_sulfur_dioxide REAL,
-    			density REAL,
-    			pH REAL,
-    			sulphates REAL,
- 				alcohol REAL,
+                residual_sugar REAL,
+                chlorides REAL,
+                free_sulfur_dioxide REAL,
+                total_sulfur_dioxide REAL,
+                density REAL,
+                pH REAL,
+                sulphates REAL,
+                alcohol REAL,
                 id_usuario INTEGER NOT NULL,
                 FOREIGN KEY(id_usuario) REFERENCES usuario ON DELETE CASCADE,
                 CONSTRAINT uk_vinho UNIQUE (nome_vinho, id_usuario)
             );
-        	''')
+        ''')
 
         conn.close()
 
@@ -90,6 +90,32 @@ def registra_vinho(**kwargs):
     return executa_query(sql)
 
 
+def busca_vinho(id):
+    '''
+    Busca e retorna features do vinho armazenadas no banco
+    '''
+    sql = 'SELECT * FROM vinho WHERE id_vinho={}'.format(id)
+
+    # Executa instrução sql
+    nome_colunas, row = executa_query(sql)
+
+    # Retorna None ou o registro
+    return None if len(row) == 0 else dict(zip(nome_colunas, row[0]))
+
+
+def busca_vinho_nome(nome):
+    '''
+    Busca e retorna features do vinho armazenadas no banco
+    '''
+    sql = 'SELECT * FROM vinho WHERE nome_vinho="{}"'.format(nome)
+
+    # Executa instrução sql
+    nome_colunas, row = executa_query(sql)
+
+    # Retorna None ou o registro
+    return None if len(row) == 0 else dict(zip(nome_colunas, row[0]))
+
+
 def get_ranking(limit=-1):
     '''
     Retorna vinhos e seus usuários criadores, ordenado pela nota do vinho em
@@ -98,11 +124,11 @@ def get_ranking(limit=-1):
     '''
 
     sql = '''
-    	SELECT usuario.id_usuario, vinho.id_vinho, usuario.nome_usuario,
+        SELECT usuario.id_usuario, vinho.id_vinho, usuario.nome_usuario,
         vinho.nome_vinho, curso, periodo, nota
-    	FROM usuario LEFT JOIN vinho on usuario.id_usuario=vinho.id_usuario
-    	ORDER BY nota desc
-    	'''
+        FROM usuario LEFT JOIN vinho on usuario.id_usuario=vinho.id_usuario
+        ORDER BY nota desc
+        '''
     nome_colunas, rows = executa_query(sql)
 
     ranking = []

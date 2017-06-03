@@ -3,12 +3,15 @@
 ''' Arquivo de configuração '''
 
 # Path do modelo classificador.
-PATH_MODEL = 'model/teste.model'
+PATH_MODEL = 'model/model.pk1'
 
 # Path do arquivo de banco de dados
 _ARQUIVO_BANCO_ = 'db.sqlite'
 
-# Configure aqui informações das features a ser utulizada no modelo classificador.
+'''
+Configure aqui informações das features a ser utulizada
+no modelo classificador. Obs.: máximo de 3 casas decimais.
+'''
 FEATURES = [
     {'nome': 'fixed_acidity', 'title': 'Acidez fixa', 'min': 3.8, 'max': 14.2},
     {'nome': 'volatile_acidity', 'title': 'Acidez volátil', 'min': 0.08, 'max': 1.1},
@@ -17,7 +20,7 @@ FEATURES = [
     {'nome': 'chlorides', 'title': 'Cloretos', 'min': 0.009, 'max': 0.346},
     {'nome': 'free_sulfur_dioxide', 'title': 'Dióxido de enxofre', 'min': 2, 'max': 289},
     {'nome': 'total_sulfur_dioxide', 'title': 'Dióxido de enxofre total', 'min': 9, 'max': 440},
-    {'nome': 'density', 'title': 'Densidade', 'min': 0.98711, 'max': 1.03898},
+    {'nome': 'density', 'title': 'Densidade', 'min': 0.987, 'max': 1.039},
     {'nome': 'pH', 'title': 'pH', 'min': 2.72, 'max': 3.82},
     {'nome': 'sulphates', 'title': 'Sulfatos', 'min': 0.22, 'max': 1.08},
     {'nome': 'alcohol', 'title': 'Álcool', 'min': 8, 'max': 14.2}
