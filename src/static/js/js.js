@@ -1,30 +1,37 @@
 // Definindo modulo do angularJS
 app = angular.module('BlankApp', ['ngMaterial']);
 
-// Pesquina na tabela 
 var filtro = document.getElementById('busca');
 
 var tabela = document.getElementById('lista');
-filtro.onkeyup = function() {
-    var nomeFiltro = filtro.value;
-    console.log('nome do filtro ' + nomeFiltro)
-    for (var i = 1; i < tabela.rows.length; i++) {
-        
-        var nome = tabela.rows[i].cells[1].innerText;
-      	var curso = tabela.rows[i].cells[2].innerText;
 
-        var corresponde = nome.toLowerCase().indexOf(nomeFiltro) >= 0 || curso.toLowerCase().indexOf(nomeFiltro) >= 0;
-        
-        tabela.rows[i].style.display = corresponde ? '' : 'none';
+// Pesquina na tabela 
+if (filtro != null){
+    filtro.onkeyup = function() {
+        var nomeFiltro = filtro.value;
+        for (var i = 1; i < tabela.rows.length; i++) {
+            
+            var nome = tabela.rows[i].cells[1].innerText;
+          	var curso = tabela.rows[i].cells[2].innerText;
+            var vinho = tabela.rows[i].cells[4].innerText;
+
+            var corresponde = nome.toLowerCase().indexOf(nomeFiltro) >= 0 || 
+                                curso.toLowerCase().indexOf(nomeFiltro) >= 0 ||
+                                vinho.toLowerCase().indexOf(nomeFiltro) >= 0;
+            
+            tabela.rows[i].style.display = corresponde ? '' : 'none';
+        }
+    };
+}
+
+$(document).ready(function(){
+    id = $('#id').val()
+    //Scroll suave
+    if(id != 'None' && id != undefined){
+        // css
+        $('#'+id).css('background-color', '#b3b3ff');
+    
+        // Scroll suave
+        $('html,body').animate({scrollTop: $('#'+id).offset().top}, 2000);
     }
-};
-
-//Âncora
-document.addEventListener("DOMContentLoaded", function(event) {
-	console.log("DOM completamente carregado e analisado" + event);
-	
-    posicao = document.getElementById('posicao').value;
-    document.getElementById(posicao).style.background = '#b3b3ff';
-
-    window.location.href = "#" + posicao ;
 });

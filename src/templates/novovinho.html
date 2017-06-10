@@ -1,28 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-
 	<!-- Formulario de informações do vinho e usuário -->
-	<form action="/" method="POST">
-		<div layout="row"  class="container" flex="100">
-			<div >
-
+	<form action="/" method="POST" >
+			<div class="container">
 				<span style="color: red;"">{{mensagem}}</span>
-				
 				<h3>Dados do usuários</h3>
 				<div>
-
 					<!-- Dados do usuário -->
 					<div layout="row" layout-sm="column" layout-xs="column">
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Nome e Sobrenome</label>
-							<input required name='nome' ng-model="project.nome">
+							<input required name='nome' maxlength="50" ng-model="project.nome">
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm > 
 							<label>Digite aqui o nome do seu curso</label>
-							<input name="curso">
+							<input name="curso" maxlength="50">
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm>
@@ -33,26 +27,24 @@
 
 					<md-input-container class="md-block" flex-gt-sm >
 						<label>Digite aqui o nome do seu vinho</label>
-						<input required name="nome_vinho" ng-model="project.nomeVinho">
+						<input required name="nome_vinho" maxlength="50" ng-model="project.nomeVinho">
 					</md-input-container>
-
 				</div>
 
-				
 				<h3>Dados do vinho</h3>
-				<div class="container">
+				<div>
 					{% for feature in features %}
-						<md-slider-container ng-init="{{feature.nome}}={{feature.media}}" >
+						<md-slider-container layout="row" ng-init="{{feature.nome}}={{feature.media}}" >
 							
-							<div layout="row" flex="20" style="margin-right: 50px">
-							<span >{{ feature.title }}</span>
+							<div flex="15">
+								<span style="font-size: 14px">{{ feature.title }}</span>
 							</div>
 							
-							
-							<md-slider flex="80" ng-model={{feature.nome}} min={{feature.min}} max={{feature.max}} aria-label="red" step="0.0001"  id="red-slider">
-							</md-slider>
-							
-							<div>
+							<div flex="75">
+								<md-slider ng-model={{feature.nome}} min={{feature.min}} max={{feature.max}} aria-label="red" step="0.001"  id="red-slider">
+								</md-slider>
+							</div>
+							<div flex=10>
 								<md-input-container >
 									<input flex type="number"  ng-model={{feature.nome}} aria-label="red"
 									min={{feature.min}} max={{feature.max}} aria-controls="red-slider" 
@@ -69,8 +61,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</form>
-
-
 {% endblock %}

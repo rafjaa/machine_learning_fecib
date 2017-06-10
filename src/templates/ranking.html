@@ -3,8 +3,7 @@
 {% block content %}
 	
 	
-	<div layout-padding  class="container">
-  		
+	<div class="container">
   		<!-- Pesquisa -->
 		<md-input-container class="md-block" flex-gt-xs>
            	<label>Digite um termo para pesquisa...</label>
@@ -12,11 +11,9 @@
         	<input type="text" id='busca' >
         </md-input-container>
 
-
 		<!-- Exibe ranking -->
 		<section id="ranking">
-			<div class="container-fluid panel panel-info">
-				
+			<div>
 				<div class="panel-heading" layout="row" ng-init="total={{ total }}">
 					<h4>Melhores vinhos produzidos</h4>
 					<span flex></span>
@@ -24,12 +21,10 @@
 						Exibir Gráfico
 					</md-button>
 				</div>
-
-				<div class="panel-body">
-					
+				<div>
 					<!-- Amazena ultima posição inserida-->
-					<input type="hidden" id="posicao" value={{posicao}}>
-					
+					<input type="hidden" id="id" value={{ request.args.get('id') }}>
+					<div class="table-responsive">
 					<table class="table table-striped table-hover" id="lista" >
 						<tr class="success">
 							<th>Posição</th>
@@ -41,7 +36,7 @@
 						</tr>
 					  	
 					  	{% for user in users  %}
-							<tr id="{{loop.index}}">
+							<tr id="{{user.id_usuario}}">
 								<td><h4><strong >{{ loop.index }}°</strong></h4></td>
 								<td><strong>{{ user.nome_usuario }}</strong></td>
 								<td><strong>{{ user.curso }}</strong></td>
@@ -52,6 +47,7 @@
 
 						{% endfor %}
 					</table>
+					</div>
 				</div>
 			</div>
 		</section>

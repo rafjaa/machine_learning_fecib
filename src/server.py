@@ -6,7 +6,7 @@ from db import verifica_banco, get_ranking
 from db import busca_vinho_nome, busca_vinho
 
 from flask import render_template
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask import request
 
 from settings import PATH_MODEL, FEATURES
@@ -54,21 +54,15 @@ def avalia_feature(**kwargs):
 
 
 @app.route('/', methods=["GET"])
-def inicial(id_usuario=None):
+def inicial():
     '''
     Exibe tela inicial com classificação dos vinhos produzidos pelos usuário.
     '''
     # Recebe lista com usuários cadastrados e ordena em ordem decrescente
     users = get_ranking()
 
-    # Encontra posição do último usuário cadastrado
-    posicao = 0
-    for indice, usuario in enumerate(users):
-        if id_usuario == usuario['id_usuario']:
-            posicao = indice + 1
-
     return render_template(
-        'ranking.html', users=users, total=len(users), posicao=posicao
+        'ranking.html', users=users, total=len(users)
     )
 
 
@@ -111,9 +105,9 @@ def processa():
 
     form_data['nota'] = round(nota, 4)
     form_data['id_usuario'] = id_usuario
-
     registra_vinho(**form_data)
-    return inicial(id_usuario)
+
+    return redirect(url_for('inicial', id=id_usuario))
 
 
 @app.route('/grafico', methods=['GET'])
@@ -174,10 +168,16 @@ def exibe_grafico():
     ax.legend(legend, [x[0] for x in vinho])
 
     plt.show()
-    return inicial()
+    # return inicial()
+    return redirect(url_for('inicial'))
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return 'erro', 404
 
 
 if __name__ == "__main__":
     verifica_banco()
     media_features()
-    app.run()
+    app.run(host='0.0.0.0')
