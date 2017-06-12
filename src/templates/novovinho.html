@@ -11,7 +11,7 @@
 					<div layout="row" layout-sm="column" layout-xs="column">
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Nome e Sobrenome</label>
-							<input required name='nome' maxlength="50" ng-model="project.nome">
+							<input required name='nome' maxlength="50">
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm > 
@@ -27,7 +27,7 @@
 
 					<md-input-container class="md-block" flex-gt-sm >
 						<label>Digite aqui o nome do seu vinho</label>
-						<input required name="nome_vinho" maxlength="50" ng-model="project.nomeVinho">
+						<input required name="nome_vinho" maxlength="50">
 					</md-input-container>
 				</div>
 
@@ -37,7 +37,7 @@
 						<md-slider-container layout="row" ng-init="{{feature.nome}}={{feature.media}}" >
 							
 							<div flex="15">
-								<span style="font-size: 14px">{{ feature.title }}</span>
+								<span>{{ feature.title }}</span>
 							</div>
 							
 							<div flex="75">
@@ -48,7 +48,7 @@
 								<md-input-container >
 									<input flex type="number"  ng-model={{feature.nome}} aria-label="red"
 									min={{feature.min}} max={{feature.max}} aria-controls="red-slider" 
-									step="0.001" name={{feature.nome}}>
+									step="0.001" name={{feature.nome}} required="Digite um número">
 								</md-input-container>
 							</div>
 

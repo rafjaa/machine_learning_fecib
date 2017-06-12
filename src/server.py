@@ -161,11 +161,11 @@ def exibe_grafico():
     ax.set_zticklabels('')
     ax.set_yticklabels(['1°', '', '2°', '', '3°', '', '4°'])
 
-    ax.set_xlabel('Features')
+    ax.set_xlabel('Parâmetros')
     ax.set_zlabel('Valores')
     ax.set_ylabel('Posição')
 
-    ax.legend(legend, [x[0] for x in vinho])
+    ax.legend(legend, [x['title'] for x in FEATURES])
 
     plt.show()
     # return inicial()
@@ -174,7 +174,7 @@ def exibe_grafico():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return 'erro', 404
+    return redirect(url_for('inicial'))
 
 
 if __name__ == "__main__":

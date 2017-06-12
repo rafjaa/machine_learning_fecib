@@ -33,7 +33,7 @@ a:hover{
 }
 
 input[type="Number"] {
-	width: 90px;
+	width: 110px;
 }
 
 #periodo {
@@ -44,3 +44,14 @@ input[type="Number"] {
   margin-top:5px
 }
 
+/* Botão voltar ao topo */
+a[href="#top"]{
+    position:fixed;
+    bottom: 1%;
+    right: 1%;
+    display:none;
+}
+
+.md-block{
+	margin-left: 20px; 
+}
